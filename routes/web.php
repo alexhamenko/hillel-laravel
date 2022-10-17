@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/category/{category}', [CategoryController::class, 'show']);
+Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory']);
+Route::get('/author/{author}', [AuthorController::class, 'show']);
