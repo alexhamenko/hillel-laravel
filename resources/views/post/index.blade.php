@@ -1,4 +1,4 @@
-@section('title', 'Home page')
+@section('title', 'Posts page')
 
 @section('navigation')
     @include('particles.navigation', [
@@ -6,14 +6,29 @@
             [
                 'link' => '/',
                 'name' => 'Home',
+                'current' => false
+            ],
+            [
+                'link' => '/post',
+                'name' => 'Posts',
                 'current' => true
-            ]
+            ],
+            [
+                'link' => '/tag',
+                'name' => 'Tags',
+                'current' => false
+            ],
+            [
+                'link' => '/category',
+                'name' => 'Categories',
+                'current' => false
+            ],
         ]
     ])
 @endsection
 
 <x-layout>
-    @php $headings = ['#', 'Title', 'Body', 'Category', 'Tags', 'Author', 'Updated At'] @endphp
+    @php $headings = ['#', 'Title', 'Body', 'Category', 'Tags', 'Author', 'Actions'] @endphp
     <x-table-striped :headings="$headings">
         @forelse($posts as $post)
             <tr>
@@ -31,7 +46,11 @@
                 <td>
                     <a href="/author/{{ $post->user->id }}">{{ $post->user->name }}</a>
                 </td>
-                <td>{{ $post->updated_at->format('Y-m-d') }}</td>
+                <td class="d-grid gap-2">
+                    <a href="{{ route('admin.post.show', ['id' => $post->id]) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ route('admin.post.update') }}" class="btn btn-success">Update</a>
+                    <a href="{{ route('admin.post.delete', ['id' => $post->id]) }}" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         @empty
             <tr>
@@ -40,4 +59,6 @@
         @endforelse
     </x-table-striped>
     {{ $posts->onEachSide(1)->links() }}
-</x-layout>>
+
+    <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Create New Post</a>
+</x-layout>
