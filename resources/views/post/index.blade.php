@@ -13,7 +13,7 @@
 @endsection
 
 <x-layout>
-    @php $headings = ['#', 'Title', 'Body', 'Category', 'Author', 'Updated At'] @endphp
+    @php $headings = ['#', 'Title', 'Body', 'Category', 'Tags', 'Author', 'Updated At'] @endphp
     <x-table-striped :headings="$headings">
         @forelse($posts as $post)
             <tr>
@@ -22,6 +22,11 @@
                 <td class="text-truncate" style="max-width: 300px;">{{ $post->body }}</td>
                 <td>
                     <a href="/category/{{ $post->category->id }}">{{ $post->category->title }}</a>
+                </td>
+                <td>
+                    @foreach($post->tags as $tag)
+                        <a href="/tag/{{ $tag->id }}">{{ $tag->title }}</a>
+                    @endforeach
                 </td>
                 <td>
                     <a href="/author/{{ $post->user->id }}">{{ $post->user->name }}</a>
@@ -34,4 +39,5 @@
             </tr>
         @endforelse
     </x-table-striped>
+    {{ $posts->onEachSide(1)->links() }}
 </x-layout>>
