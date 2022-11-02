@@ -1,4 +1,4 @@
-@section('title', "$author->name posts in $category->title category")
+@section('title', "$tag->title tag")
 
 @section('navigation')
     @include('particles.navigation', [
@@ -13,19 +13,14 @@
 @endsection
 
 <x-layout>
-    <h1 class="text-center my-3">{{ $author->name . ' posts in ' . $category->title . ' category' }}</h1>
-    @php $headings = ['#', 'Title', 'Body', 'Tags', 'Updated At'] @endphp
+    <h1 class="text-center my-3">{{ $tag->title . ' posts' }}</h1>
+    @php $headings = ['#', 'Title', 'Body', 'Updated At'] @endphp
     <x-table-striped :headings="$headings">
-        @forelse($posts as $post)
+        @forelse($tag->posts as $post)
             <tr>
                 <th>{{ $post->id }}</th>
                 <th>{{ $post->title }}</th>
                 <th class="text-truncate" style="max-width: 300px;">{{ $post->body }}</th>
-                <td>
-                    @foreach($post->tags as $tag)
-                        <a href="/author/{{ $post->user->id }}/category/{{ $post->category->id }}/tag/{{ $tag->id }}">{{ $tag->title }}</a>
-                    @endforeach
-                </td>
                 <th>{{ $post->updated_at->format('Y-m-d') }}</th>
             </tr>
         @empty

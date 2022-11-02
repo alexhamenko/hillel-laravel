@@ -6,7 +6,7 @@ use App\Models\Category;
 
 class CategoryController
 {
-    public function show($category_id)
+    public function __invoke($category_id)
     {
         $category = Category::find($category_id);
 

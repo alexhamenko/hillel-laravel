@@ -6,9 +6,9 @@ use App\Models\Post;
 
 class HomeController
 {
-    public function index()
+    public function __invoke()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
 
         return view('post/index', compact('posts'));
     }
