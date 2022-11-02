@@ -24,7 +24,7 @@ class PostFactory extends Factory
             'title' => ucfirst(fake()->words(2, true)),
             'body' => fake()->realText(fake()->numberBetween(100, 200)),
             'category_id' => 1,
-            'user_id' => 1
+            'user_id' => 1,
         ];
     }
 }
