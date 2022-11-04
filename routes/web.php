@@ -23,6 +23,7 @@ Route::get('/', HomeController::class)->name('home');
 //Route::get('/tag/{tag}', TagController::class)->name('posts.by_tag');
 //Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('posts.by_author.by_category.by_tag');
 //Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('posts.by_author.by_category');
+Route::get('/author/{id}/', [AuthorController::class, 'show'])->name('admin.author.show');
 
 Route::get('/post', [PostController::class, 'index'])->name('admin.post');
 Route::get('/post/{id}/show', [PostController::class, 'show'])->name('admin.post.show');
@@ -38,6 +39,7 @@ Route::get('/category/create', [CategoryController::class, 'create'])->name('adm
 Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
 Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
 Route::post('/category/update', [CategoryController::class, 'update'])->name('admin.category.update');
+Route::get('/category/{id}/detachpost/{post_id}', [CategoryController::class, 'detachpost'])->name('admin.category.detachpost');
 Route::get('/category/{id}/delete', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
 Route::get('/tag', [TagController::class, 'index'])->name('admin.tag');

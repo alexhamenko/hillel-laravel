@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PostController
 {
@@ -34,94 +35,75 @@ class PostController
 
     public function store(Request $request)
     {
-//        $request->validate([
-//            'title' => ['required', 'min:3'],
-//            'category_id' => [
-//                'required',
-//                'exists:Hillel\Models\Category,id'
-//            ],
-//            'tags' => [
-//                'required',
-//                'exists:Hillel\Models\Tag,id'
-//            ]
-//        ]);
-//
-//        $data = $request->all();
-//
-//        if ($validator->fails()) {
-//            $_SESSION['errors'] = $validator->errors()->toArray();
-//            $_SESSION['data'] = $data;
-//            return new RedirectResponse($_SERVER['HTTP_REFERER']);
-//        }
-//
-//        $post = new Post();
-//        $post->title = $data['title'];
-//        $post->slug = $data['slug'];
-//        $post->body = $data['body'];
-//        $post->category_id = $data['category_id'];
-//        $post->save();
-//        $post->tags()->attach($data['tags']);
-//
-//        $_SESSION['success'] = 'Post ' . $data['title'] . ' was successfully created';
-//
-//        return redirect()->route('admin.post');
+        $request->validate([
+            'title' => [
+                'required',
+                'min:3',
+                'unique:posts,title',
+            ],
+            'body' => ['required'],
+            'category_id' => [
+                'required',
+                'exists:App\Models\Category,id'
+            ],
+            'tags' => [
+                'required',
+                'exists:App\Models\Tag,id'
+            ]
+        ]);
+
+        $data = $request->all();
+        $data['user_id'] = 1;
+
+        $post = Post::create($data);
+        $post->tags()->attach($request->input('tags'));
+
+        return redirect()->route('admin.post');
     }
-//
-//    public function edit($id)
-//    {
-//        $post = Post::find($id);
-//        $categories = Category::all();
-//        $tags = Tag::all();
-//        return view('post/form-edit', compact('post', 'categories', 'tags'));
-//    }
-//
-//    public function update()
-//    {
-//        $data = request()->all();
-//
-//        $post = Post::find($data['id']);
-//
-//        $validator = validator()->make($data, [
-//            'title' => ['required', 'min:3'],
-//            'slug' => [
-//                'required',
-//                'min:3',
-//                'alpha_num',
-//                Rule::unique('posts', 'slug')->ignore($post->id),
-//            ],
-//            'category_id' => [
-//                'required',
-//                'exists:Hillel\Models\Category,id'
-//            ],
-//            'tags' => [
-//                'required',
-//                'exists:Hillel\Models\Tag,id'
-//            ],
-//        ]);
-//
-//        if ($validator->fails()) {
-//            $_SESSION['errors'] = $validator->errors()->toArray();
-//            $_SESSION['data'] = $data;
-//            return new RedirectResponse($_SERVER['HTTP_REFERER']);
-//        }
-//
-//        $post->title = $data['title'];
-//        $post->slug = $data['slug'];
-//        $post->body = $data['body'];
-//        $post->category_id = $data['category_id'];
-//        $post->save();
-//        $post->tags()->sync($data['tags']);
-//
-//        $_SESSION['success'] = 'Post ' . $data['title'] . ' was successfully updated';
-//
-//        return new RedirectResponse('/post');
-//    }
-//
-//    public function destroy($id)
-//    {
-//        $post = Post::find($id);
-//        $post->tags()->detach();
-//        $post->delete();
-//        return new RedirectResponse('/post');
-//    }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('post/form-edit', compact('post', 'categories', 'tags'));
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('id');
+        $post = Post::find($id);
+        $request->validate([
+            'title' => [
+                'required',
+                'min:3',
+                Rule::unique('posts', 'title')->ignore($post->id),
+            ],
+            'body' => ['required'],
+            'category_id' => [
+                'required',
+                'exists:App\Models\Category,id'
+            ],
+            'tags' => [
+                'required',
+                'exists:App\Models\Tag,id'
+            ]
+        ]);
+
+        $data = $request->all();
+        $data['user_id'] = 1;
+
+        $post->update($data);
+        $post->tags()->sync($request->input('tags'));
+
+        return redirect()->route('admin.post');
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+        $post->tags()->detach();
+        $post->delete();
+        return redirect()->route('admin.post');
+    }
 }

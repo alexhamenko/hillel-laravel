@@ -29,4 +29,4 @@
             </tr>
         @endforelse
     </x-table-striped>
-</x-layout>>
+</x-layout>

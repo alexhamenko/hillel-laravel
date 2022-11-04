@@ -1,20 +1,13 @@
-@section('title', "$tag->title tag")
-
-@section('navigation')
-    @include('particles.navigation', [
-        'links' => [
-            [
-                'link' => '/',
-                'name' => 'Home',
-                'current' => false
-            ]
-        ]
-    ])
-@endsection
+@section('title', __('custom.tag_type', ['type' => $tag->title]))
 
 <x-layout>
-    <h1 class="text-center my-3">{{ $tag->title . ' posts' }}</h1>
-    @php $headings = ['#', 'Title', 'Body', 'Updated At'] @endphp
+    <h1 class="text-center my-3">{{ __('custom.posts_type', ['type' => $tag->title]) }}</h1>
+    @php $headings = [
+        '#',
+        __('custom.headings.title'),
+        __('custom.headings.body'),
+        __('custom.headings.updated_at')
+    ] @endphp
     <x-table-striped :headings="$headings">
         @forelse($tag->posts as $post)
             <tr>
@@ -25,8 +18,9 @@
             </tr>
         @empty
             <tr>
-                <td colspan="{{ count($headings) }}" style="text-align: center">No posts found!</td>
+                <td colspan="{{ count($headings) }}" style="text-align: center">{{ __('custom.not_found', ['type' => 'posts']) }}</td>
             </tr>
         @endforelse
     </x-table-striped>
-</x-layout>>
+    <a href="{{ route('admin.tag') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'tags']) }}</a>
+</x-layout>

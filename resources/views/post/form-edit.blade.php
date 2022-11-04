@@ -1,16 +1,17 @@
-@section('title', __('custom.action.create_type', ['type' => 'post']))
+@section('title', __('custom.action.update_type', ['type' => 'post']))
 
 <x-layout>
-    <h1>{{ __('custom.action.create_type', ['type' => 'post']) }}</h1>
-    <form action="{{ route('admin.post.store') }}" method="post" class="mb-3">
+    <h1>{{ __('custom.action.update_type', ['type' => 'post']) }}</h1>
+    <form action="{{ route('admin.post.update') }}" method="post" class="mb-3">
         @csrf
+        <input type="hidden" value="{{ $post->id }}" name="id">
         <div class="mb-3">
             <label for="title" class="form-label">{{ __('custom.headings.title') }}</label>
             <input type="text"
                    class="form-control"
                    id="title"
                    name="title"
-                   value="{{ old('title') }}">
+                   value="{{ $post->title  }}">
             @if($errors->has('title'))
                 @foreach($errors->get('title') as $error)
                     <div class="alert alert-danger" role="alert">
@@ -24,7 +25,7 @@
             <textarea class="form-control"
                       id="body"
                       name="body"
-                      rows="5">{{ old('body') }}</textarea>
+                      rows="5">{{ $post->body }}</textarea>
             @if($errors->has('body'))
                 @foreach($errors->get('body') as $error)
                     <div class="alert alert-danger" role="alert">
@@ -38,10 +39,10 @@
                 <label for="category_id">{{ __('custom.action.select_type', ['type' => 'category']) }}</label>
                 <select class="form-select" name="category_id" id="category_id">
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->title}}</option>
+                        <option @selected($category->id == $post->category_id) value="{{$category->id}}">{{$category->title}}</option>
                     @endforeach
                 </select>
-                @if($errors->has('category_id'))`
+                @if($errors->has('category_id'))
                     @foreach($errors->get('category_id') as $error)
                         <div class="alert alert-danger" role="alert">
                             {{ $error }}
@@ -53,7 +54,7 @@
                 <label for="tags">{{ __('custom.action.select_type', ['type' => 'tags']) }}</label>
                 <select class="form-select" name="tags[]" id="tags" multiple>
                     @foreach($tags as $tag)
-                        <option value="{{$tag->id}}">{{$tag->title}}</option>
+                        <option value="{{$tag->id}}" @selected(in_array($tag->id, $post->tags->pluck('id')->toArray()))>{{$tag->title}}</option>
                     @endforeach
                 </select>
                 @if($errors->has('tags'))
@@ -68,5 +69,5 @@
         <button type="submit" class="btn btn-primary">{{ __('custom.action.submit') }}</button>
     </form>
 
-    <a href="{{ route('admin.post') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'posts']) }}<</a>
+    <a href="{{ route('admin.post') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'posts']) }}</a>
 </x-layout>

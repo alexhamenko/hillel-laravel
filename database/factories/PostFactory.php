@@ -21,7 +21,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => ucfirst(fake()->words(2, true)),
+            'title' => ucfirst(fake()->unique()->words(2, true)),
             'body' => fake()->realText(fake()->numberBetween(100, 200)),
             'category_id' => 1,
             'user_id' => 1,
