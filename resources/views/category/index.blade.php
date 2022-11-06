@@ -36,7 +36,7 @@
                         <div class="btn btn-primary btn-post d-inline-flex mb-2 me-2"
                              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;">
                             {{ $post->title }}
-                            @if($category->id !== 1)
+                            @if($category->id !== $defaultCategoryId)
                                 <a href="/category/{{ $category->id }}/detachpost/{{ $post->id }}"
                                    class="btn btn-close ms-1"></a>
                             @endif
@@ -45,7 +45,7 @@
                 </th>
                 <td class="d-grid gap-2">
                     <a href="{{ route('admin.category.show', ['id' => $category->id]) }}" class="btn btn-primary">{{ __('custom.action.show') }}</a>
-                    @if($category['id'] !== 1)
+                    @if($category['id'] !== $defaultCategoryId)
                         <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn btn-success">{{ __('custom.action.update') }}</a>
                         @if($category->posts()->count() > 0)
                         <div

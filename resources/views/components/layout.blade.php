@@ -15,8 +15,8 @@
             <ul class="nav nav-tabs">
                 <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">{{ __('custom.headings.home') }}</x-nav-link>
                 <x-nav-link href="{{ route('admin.post') }}" :active="request()->routeIs('admin.post')">{{ __('custom.headings.posts') }}</x-nav-link>
-                <x-nav-link href="{{ route('admin.category') }}" :active="request()->routeIs('admin.category')">{{ __('custom.headings.tags') }}</x-nav-link>
-                <x-nav-link href="{{ route('admin.tag') }}" :active="request()->routeIs('admin.tag')">{{ __('custom.headings.categories') }}</x-nav-link>
+                <x-nav-link href="{{ route('admin.category') }}" :active="request()->routeIs('admin.category')">{{ __('custom.headings.categories') }}</x-nav-link>
+                <x-nav-link href="{{ route('admin.tag') }}" :active="request()->routeIs('admin.tag')">{{ __('custom.headings.tags') }}</x-nav-link>
             </ul>
         </div>
         <div class="col-2 d-flex align-items-center">

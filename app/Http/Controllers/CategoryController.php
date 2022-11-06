@@ -12,8 +12,9 @@ class CategoryController
     public function index()
     {
         $categories = Category::paginate(5);
+        $defaultCategoryId = Category::getDefaultCategoryId();
 
-        return view('category/index', compact('categories'));
+        return view('category/index', compact('categories', 'defaultCategoryId'));
     }
 
     public function show($id)
@@ -95,7 +96,8 @@ class CategoryController
     public function detachpost($id, $post_id)
     {
         $category = Category::find($id);
-        $category->posts()->where('id', $post_id)->update(['category_id' => 1]);
+        $defaultCategoryId = Category::getDefaultCategoryId();
+        $category->posts()->where('id', $post_id)->update(['category_id' => $defaultCategoryId]);
         return redirect()->route('admin.category');
     }
 
