@@ -10,10 +10,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AuthorController
 {
-    public function show($author_id)
+    public function show($id)
     {
-        $author = User::find($author_id);
-
+        $author = User::find($id);
         return view('author/show', compact('author'));
     }
 

@@ -1,17 +1,5 @@
 @section('title', "$author->name posts in $category->title category with $tag->title tag")
 
-@section('navigation')
-    @include('particles.navigation', [
-        'links' => [
-            [
-                'link' => '/',
-                'name' => 'Home',
-                'current' => false
-            ]
-        ]
-    ])
-@endsection
-
 <x-layout>
     <h1 class="text-center my-3">{{ $author->name . ' posts in ' . $category->title . ' category with ' . $tag->title . ' tag' }}</h1>
     @php $headings = ['#', 'Title', 'Body', 'Updated At'] @endphp
@@ -29,4 +17,4 @@
             </tr>
         @endforelse
     </x-table-striped>
-</x-layout>>
+</x-layout>
