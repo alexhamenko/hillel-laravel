@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 Route::get('/', HomeController::class)->name('home');
-//Route::get('/category/{category}', CategoryController::class)->name('posts.by_category');
-//Route::get('/tag/{tag}', TagController::class)->name('posts.by_tag');
-//Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('posts.by_author.by_category.by_tag');
-//Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('posts.by_author.by_category');
+Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('admin.author.category.show');
+Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('admin.author.category.show');
 Route::get('/author/{id}/', [AuthorController::class, 'show'])->name('admin.author.show');
 
 Route::get('/post', [PostController::class, 'index'])->name('admin.post');
