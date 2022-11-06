@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('language/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
-    return redirect()->back();
-});
+Route::get('/language/{locale}', LocalizationController::class);
 Route::get('/', HomeController::class)->name('home');
 Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('admin.author.category.show');
 Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('admin.author.category.show');
