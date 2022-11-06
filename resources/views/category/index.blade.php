@@ -1,31 +1,5 @@
 @section('title', __('custom.page_type', ['type' => 'category']))
 
-@section('navigation')
-    @include('particles.navigation', [
-        'links' => [
-            [
-                'link' => '/',
-                'name' => __('custom.headings.home'),
-                'current' => false
-            ],
-            [
-                'link' => '/post',
-                'name' => __('custom.headings.posts'),
-                'current' => false
-            ],
-            [
-                'link' => '/tag',
-                'name' => __('custom.headings.tags'),
-                'current' => false
-            ],
-            [
-                'link' => '/category',
-                'name' => __('custom.headings.categories'),
-                'current' => true
-            ],
-        ]
-    ])
-@endsection
 @push('styles')
     <style>
         .btn.btn-post:hover {

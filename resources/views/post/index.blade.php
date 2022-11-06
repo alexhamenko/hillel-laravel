@@ -1,32 +1,5 @@
 @section('title', __('custom.page_type', ['type' => 'posts']))
 
-@section('navigation')
-    @include('particles.navigation', [
-        'links' => [
-            [
-                'link' => '/',
-                'name' => __('custom.headings.home'),
-                'current' => false
-            ],
-            [
-                'link' => '/post',
-                'name' => __('custom.headings.posts'),
-                'current' => true
-            ],
-            [
-                'link' => '/tag',
-                'name' => __('custom.headings.tags'),
-                'current' => false
-            ],
-            [
-                'link' => '/category',
-                'name' => __('custom.headings.categories'),
-                'current' => false
-            ],
-        ]
-    ])
-@endsection
-
 <x-layout>
     @php $headings = [
         '#',

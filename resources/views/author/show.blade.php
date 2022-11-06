@@ -1,17 +1,5 @@
 @section('title', "$author->name")
 
-@section('navigation')
-    @include('particles.navigation', [
-        'links' => [
-            [
-                'link' => '/',
-                'name' => 'Home',
-                'current' => false
-            ]
-        ]
-    ])
-@endsection
-
 <x-layout>
     <h1 class="text-center my-3">{{ $author->name . ' posts' }}</h1>
     @php $headings = ['#', 'Title', 'Body', 'Author\'s posts in category', 'Updated At'] @endphp
