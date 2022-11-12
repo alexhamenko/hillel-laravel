@@ -1,37 +1,26 @@
 @section('title', __('custom.page_type', ['type' => 'tag']))
 
-<x-layout>
-    @php $headings = [
-        '#',
-        __('custom.headings.title'),
-        __('custom.headings.slug'),
-        __('custom.headings.posts'),
-        __('custom.headings.actions'),
-    ] @endphp
-    <x-table-striped :headings="$headings">
-        @forelse($tags as $tag)
-            <tr>
-                <td>{{ $tag->id }}</td>
-                <td>{{ $tag->title }}</td>
-                <td>{{ $tag->slug }}</td>
-                <th>
-                    @foreach($tag->posts as $post)
-                        <a href="{{ route('admin.post.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                    @endforeach
-                </th>
-                <td class="d-grid gap-2">
-                    <a href="{{ route('admin.tag.show', ['id' => $tag->id]) }}" class="btn btn-primary">{{ __('custom.action.show') }}</a>
-                    <a href="{{ route('admin.tag.edit', ['id' => $tag->id]) }}" class="btn btn-success">{{ __('custom.action.update') }}</a>
-                    <a href="{{ route('admin.tag.delete', ['id' => $tag->id]) }}" class="btn btn-danger">{{ __('custom.action.delete') }}</a>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="{{ count($headings) }}" style="text-align: center">{{ __('custom.not_found', ['type' => 'tags']) }}</td>
-            </tr>
-        @endforelse
-    </x-table-striped>
+<x-layout.main>
+    @forelse($tags as $tag)
+        <div class="d-flex justify-content-between mb-3">
+            <h2 class="mb-0">{{ $tag->title }} latest posts</h2>
+            <a href="{{ route('tag.show', ['id' => $tag->id]) }}"
+               class="btn btn-primary ">View all</a>
+        </div>
+        <div class="row row-cols-3 g-4 mb-4">
+            @forelse($tag->posts->take(3) as $post)
+                @include('particles.post-card', [
+                    'showTags' => true,
+                    'showCategory' => false,
+                    'showAuthor' => true,
+                ])
+            @empty
+                <p>{{ __('custom.not_found', ['type' => 'posts']) }}</p>
+            @endforelse
+        </div>
+    @empty
+        <p>{{ __('custom.not_found', ['type' => 'tags']) }}</p>
+    @endforelse
     {{ $tags->onEachSide(1)->links() }}
 
-    <a href="{{ route('admin.tag.create') }}" class="btn btn-primary">{{ __('custom.action.create_type', ['type' => 'tag']) }}</a>
-</x-layout>
+</x-layout.main>

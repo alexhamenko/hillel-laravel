@@ -1,23 +1,17 @@
 @section('title', "$author->name")
 
-<x-layout>
+<x-layout.main>
     <h1 class="text-center my-3">{{ $author->name . ' posts' }}</h1>
-    @php $headings = ['#', 'Title', 'Body', 'Author\'s posts in category', 'Updated At'] @endphp
-    <x-table-striped :headings="$headings">
+    <div class="row row-cols-3 g-4 mb-4">
         @forelse($author->posts as $post)
-            <tr>
-                <th>{{ $post->id }}</th>
-                <th>{{ $post->title }}</th>
-                <th class="text-truncate" style="max-width: 300px;">{{ $post->body }}</th>
-                <th class="d-flex justify-content-between">
-                    <a href="/author/{{ $post->user->id }}/category/{{ $post->category->id }}">{{ $post->category->title }}</a>
-                </th>
-                <th>{{ $post->updated_at->format('Y-m-d') }}</th>
-            </tr>
+            @include('particles.post-card', [
+                'showTags' => true,
+                'showCategory' => true,
+                'showAuthor' => true,
+            ])
         @empty
-            <tr>
-                <td colspan="{{ count($headings) }}" style="text-align: center">No posts found!</td>
-            </tr>
+            <p>{{ __('custom.not_found', ['type' => 'posts']) }}</p>
         @endforelse
-    </x-table-striped>
-</x-layout>
+    </div>
+    <a href="{{ route('author') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'authors']) }}</a>
+</x-layout.main>

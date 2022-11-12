@@ -2,6 +2,7 @@
 
 return [
     'this_page' => 'This is :type page!',
+    'back_page' => 'Back to the :type page',
     'page_type' => ':Type page',
     'post_type' => ':Type post',
     'posts_type' => ':Type posts',
@@ -25,6 +26,8 @@ return [
         'home' => 'Home',
         'post' => 'Post',
         'posts' => 'Posts',
+        'email' => 'Email',
+        'password' => 'Password',
         'category' => 'Category',
         'categories' => 'Categories',
         'tag' => 'Tag',
@@ -35,5 +38,9 @@ return [
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
         'deleted_at' => 'Deleted At',
+        'login' => 'Login',
+        'logout' => 'Logout',
+        'name' => 'Name',
+        'admin_panel' => 'Admin panel',
     ]
 ];

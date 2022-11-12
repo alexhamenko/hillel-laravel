@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AuthorController
 {
+    public function index()
+    {
+        $authors = User::paginate(4);
+        return view('author/index', compact('authors'));
+    }
+
     public function show($id)
     {
         $author = User::find($id);

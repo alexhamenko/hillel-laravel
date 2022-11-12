@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\TagController as AdminTagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,31 +26,53 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/language/{locale}', LocalizationController::class);
 Route::get('/', HomeController::class)->name('home');
-Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('admin.author.category.show');
-Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('admin.author.category.show');
-Route::get('/author/{id}/', [AuthorController::class, 'show'])->name('admin.author.show');
 
-Route::get('/post', [PostController::class, 'index'])->name('admin.post');
-Route::get('/post/{id}/show', [PostController::class, 'show'])->name('admin.post.show');
-Route::get('/post/create', [PostController::class, 'create'])->name('admin.post.create');
-Route::post('/post/store', [PostController::class, 'store'])->name('admin.post.store');
-Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('admin.post.edit');
-Route::post('/post/update', [PostController::class, 'update'])->name('admin.post.update');
-Route::get('/post/{id}/delete', [PostController::class, 'destroy'])->name('admin.post.delete');
+Route::middleware('guest')->group(function() {
+    Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/auth/login', [AuthController::class, 'handleLogin'])->name('auth.handle.login');
+});
 
-Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
-Route::get('/category/{id}/show', [CategoryController::class, 'show'])->name('admin.category.show');
-Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
-Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
-Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
-Route::post('/category/update', [CategoryController::class, 'update'])->name('admin.category.update');
-Route::get('/category/{id}/detachpost/{post_id}', [CategoryController::class, 'detachpost'])->name('admin.category.detachpost');
-Route::get('/category/{id}/delete', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('author.category.tag.show');
+Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('author.category.show');
+Route::get('/author/{id}/', [AuthorController::class, 'show'])->name('author.show');
+Route::get('/author', [AuthorController::class, 'index'])->name('author');
 
-Route::get('/tag', [TagController::class, 'index'])->name('admin.tag');
-Route::get('/tag/{id}/show', [TagController::class, 'show'])->name('admin.tag.show');
-Route::get('/tag/create', [TagController::class, 'create'])->name('admin.tag.create');
-Route::post('/tag/store', [TagController::class, 'store'])->name('admin.tag.store');
-Route::get('/tag/{id}/edit', [TagController::class, 'edit'])->name('admin.tag.edit');
-Route::post('/tag/update', [TagController::class, 'update'])->name('admin.tag.update');
-Route::get('/tag/{id}/delete', [TagController::class, 'destroy'])->name('admin.tag.delete');
+Route::get('/post', [PostController::class, 'index'])->name('post');
+Route::get('/post/{id}/show', [PostController::class, 'show'])->name('post.show');
+
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
+Route::get('/category/{id}/show', [CategoryController::class, 'show'])->name('category.show');
+
+Route::get('/tag', [TagController::class, 'index'])->name('tag');
+Route::get('/tag/{id}/show', [TagController::class, 'show'])->name('tag.show');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+    Route::get('/admin', [PanelController::class, 'index'])->name('admin.panel');
+
+    Route::get('/admin/post', [AdminPostController::class, 'index'])->name('admin.post');
+    Route::get('/admin/post/{id}/show', [AdminPostController::class, 'show'])->name('admin.post.show');
+    Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
+    Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
+    Route::get('/admin/post/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
+    Route::post('/admin/post/update', [AdminPostController::class, 'update'])->name('admin.post.update');
+    Route::get('/admin/post/{id}/delete', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
+
+    Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category');
+    Route::get('/admin/category/{id}/show', [AdminCategoryController::class, 'show'])->name('admin.category.show');
+    Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/admin/category/store', [AdminCategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('/admin/category/{id}/edit', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::post('/admin/category/update', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+    Route::get('/admin/category/{id}/detachpost/{post_id}', [AdminCategoryController::class, 'detachpost'])->name('admin.category.detachpost');
+    Route::get('/admin/category/{id}/delete', [AdminCategoryController::class, 'destroy'])->name('admin.category.delete');
+
+    Route::get('/admin/tag', [AdminTagController::class, 'index'])->name('admin.tag');
+    Route::get('/admin/tag/{id}/show', [AdminTagController::class, 'show'])->name('admin.tag.show');
+    Route::get('/admin/tag/create', [AdminTagController::class, 'create'])->name('admin.tag.create');
+    Route::post('/admin/tag/store', [AdminTagController::class, 'store'])->name('admin.tag.store');
+    Route::get('/admin/tag/{id}/edit', [AdminTagController::class, 'edit'])->name('admin.tag.edit');
+    Route::post('/admin/tag/update', [AdminTagController::class, 'update'])->name('admin.tag.update');
+    Route::get('/admin/tag/{id}/delete', [AdminTagController::class, 'destroy'])->name('admin.tag.delete');
+});
