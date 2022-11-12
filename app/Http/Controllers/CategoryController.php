@@ -3,18 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\View\View;
 
 class CategoryController
 {
-
-    public function index()
+    /**
+     * Display listing of categories.
+     *
+     * @return View
+     */
+    public function index(): View
     {
         $categories = Category::paginate(5);
 
         return view('category/index', compact('categories'));
     }
 
-    public function show($id)
+    /**
+     * Display category with specified id.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
     {
         $category = Category::find($id);
 

@@ -49,7 +49,7 @@ Route::get('/tag/{id}/show', [TagController::class, 'show'])->name('tag.show');
 Route::middleware('auth')->group(function() {
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::get('/admin', [PanelController::class, 'index'])->name('admin.panel');
+    Route::get('/admin', PanelController::class)->name('admin.panel');
 
     Route::get('/admin/post', [AdminPostController::class, 'index'])->name('admin.post');
     Route::get('/admin/post/{id}/show', [AdminPostController::class, 'show'])->name('admin.post.show');

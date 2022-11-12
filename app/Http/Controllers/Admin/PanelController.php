@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PanelController
 {
-    public function index()
+    /**
+     * Display admin panel
+     *
+     * @return View
+     */
+    public function __invoke(): View
     {
         return view('admin/panel');
     }

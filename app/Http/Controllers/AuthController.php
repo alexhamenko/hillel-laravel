@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function login()
+    /**
+     * Display login page.
+     *
+     * @return View
+     */
+    public function login(): View
     {
         return view('auth/form');
     }
 
-    public function handleLogin(Request $request)
+    /**
+     * Handle login request
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function handleLogin(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -35,7 +48,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    /**
+     * Handle logout request
+     *
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
     {
         Auth::logout();
         request()->session()->invalidate();

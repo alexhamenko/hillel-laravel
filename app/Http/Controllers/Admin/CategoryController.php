@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CategoryController
 {
-
-    public function index()
+    /**
+     * Display listing of categories.
+     *
+     * @return View
+     */
+    public function index(): View
     {
         $categories = Category::paginate(10);
         $defaultCategoryId = Category::getDefaultCategoryId();
@@ -17,14 +23,25 @@ class CategoryController
         return view('admin/category/index', compact('categories', 'defaultCategoryId'));
     }
 
-    public function show($id)
+    /**
+     * Display category with specified id.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
     {
         $category = Category::find($id);
 
         return view('admin/category/show', compact('category'));
     }
 
-    public function create()
+    /**
+     * Display form for creating new category
+     *
+     * @return View
+     */
+    public function create(): View
     {
         $category = new Category();
         $posts = Post::all();
@@ -32,7 +49,13 @@ class CategoryController
         return view('admin/category/form', compact('category', 'posts'));
     }
 
-    public function store(Request $request)
+    /**
+     * Validate the request to create category with specified id. Create the category in storage if validation was successful
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => ['required', 'min:3'],
@@ -58,14 +81,26 @@ class CategoryController
         return redirect()->route('admin.category');
     }
 
-    public function edit($id)
+    /**
+     * Display form for updating category with specified id
+     *
+     * @param int $id
+     * @return View
+     */
+    public function edit(int $id): View
     {
         $category = Category::find($id);
         $posts = Post::all();
         return view('admin/category/form-edit', compact('category', 'posts'));
     }
 
-    public function update(Request $request)
+    /**
+     * Validate the request to update category with specified id. Update the category in storage if validation was successful
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Request $request): RedirectResponse
     {
         $id = $request->input('id');
         $category = Category::find($id);
@@ -93,7 +128,14 @@ class CategoryController
         return redirect()->route('admin.category');
     }
 
-    public function detachpost($id, $post_id)
+    /**
+     * Detach category with specified id from post with specified post_id.
+     *
+     * @param int $id
+     * @param int $post_id
+     * @return RedirectResponse
+     */
+    public function detachpost(int $id, int $post_id): RedirectResponse
     {
         $category = Category::find($id);
         $defaultCategoryId = Category::getDefaultCategoryId();
@@ -101,7 +143,13 @@ class CategoryController
         return redirect()->route('admin.category');
     }
 
-    public function destroy($id)
+    /**
+     * Remove category with specified id from storage.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
     {
         $category = Category::find($id);
         $category->delete();

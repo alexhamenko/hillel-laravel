@@ -4,24 +4,42 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class TagController
 {
-    public function index()
+    /**
+     * Display listing of tags.
+     *
+     * @return View
+     */
+    public function index(): View
     {
         $tags = Tag::paginate(10);
 
         return view('admin/tag/index', compact('tags'));
     }
 
-    public function show($id)
+    /**
+     * Display tag with specified id.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
     {
         $tag = Tag::find($id);
         return view('admin/tag/show', compact('tag'));
     }
 
-    public function create()
+    /**
+     * Display form for creating new tag
+     *
+     * @return View
+     */
+    public function create(): View
     {
         $tag = new Tag();
         $posts = Post::all();
@@ -29,7 +47,13 @@ class TagController
         return view('admin/tag/form', compact('tag', 'posts'));
     }
 
-    public function store(Request $request)
+    /**
+     * Validate the request to create tag with specified id. Create the tag in storage if validation was successful
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => ['required', 'min:3'],
@@ -50,14 +74,26 @@ class TagController
         return redirect()->route('admin.tag');
     }
 
-    public function edit($id)
+    /**
+     * Display form for updating tag with specified id
+     *
+     * @param int $id
+     * @return View
+     */
+    public function edit(int $id): View
     {
         $tag = Tag::find($id);
         $posts = Post::all();
         return view('admin/tag/form-edit', compact('tag', 'posts'));
     }
 
-    public function update(Request $request)
+    /**
+     * Validate the request to update tag with specified id. Update the tag in storage if validation was successful
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Request $request): RedirectResponse
     {
         $id = $request->input('id');
         $tag = Tag::find($id);
@@ -80,7 +116,13 @@ class TagController
         return redirect()->route('admin.tag');
     }
 
-    public function destroy($id)
+    /**
+     * Remove tag with specified id from storage.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
     {
         $tag = Tag::find($id);
         $tag->posts()->detach();

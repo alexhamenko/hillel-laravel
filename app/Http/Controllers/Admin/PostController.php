@@ -5,27 +5,45 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class PostController
 {
-    public function index()
+    /**
+     * Display listing of posts.
+     *
+     * @return View
+     */
+    public function index(): View
     {
         $posts = Post::paginate(10);
 
         return view('admin/post/index', compact('posts'));
     }
 
-    public function show($id)
+    /**
+     * Display post with specified id.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
     {
         $post = Post::find($id);
 
         return view('admin/post/show', compact('post'));
     }
 
-    public function create()
+    /**
+     * Display form for creating new post
+     *
+     * @return View
+     */
+    public function create(): View
     {
         $post = new Post();
         $categories = Category::all();
@@ -34,7 +52,13 @@ class PostController
         return view('admin/post/form', compact('post', 'categories', 'tags'));
     }
 
-    public function store(Request $request)
+    /**
+     * Validate the request to create post with specified id. Create the post in storage if validation was successful
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => [
@@ -62,7 +86,13 @@ class PostController
         return redirect()->route('admin.post');
     }
 
-    public function edit($id)
+    /**
+     * Display form for updating post with specified id
+     *
+     * @param int $id
+     * @return View
+     */
+    public function edit(int $id): View
     {
         $post = Post::find($id);
         $categories = Category::all();
@@ -70,7 +100,13 @@ class PostController
         return view('admin/post/form-edit', compact('post', 'categories', 'tags'));
     }
 
-    public function update(Request $request)
+    /**
+     * Validate the request to update post with specified id. Update the post in storage if validation was successful
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Request $request): RedirectResponse
     {
         $id = $request->input('id');
         $post = Post::find($id);
@@ -100,7 +136,13 @@ class PostController
         return redirect()->route('admin.post');
     }
 
-    public function destroy($id)
+    /**
+     * Remove post with specified id from storage.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
     {
         $post = Post::find($id);
         $post->tags()->detach();
