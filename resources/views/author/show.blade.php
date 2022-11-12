@@ -7,7 +7,7 @@
             @include('particles.post-card', [
                 'showTags' => true,
                 'showCategory' => true,
-                'showAuthor' => true,
+                'showAuthor' => false,
             ])
         @empty
             <p>{{ __('custom.not_found', ['type' => 'posts']) }}</p>
