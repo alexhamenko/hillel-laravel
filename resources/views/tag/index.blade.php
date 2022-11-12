@@ -11,7 +11,7 @@
             @forelse($tag->posts->take(3) as $post)
                 @include('particles.post-card', [
                     'showTags' => true,
-                    'showCategory' => false,
+                    'showCategory' => true,
                     'showAuthor' => true,
                 ])
             @empty
