@@ -1,6 +1,6 @@
 @section('title', "$author->name posts in $category->title category")
 
-<x-layout>
+<x-layout.main>
     <h1 class="text-center my-3">{{ $author->name . ' posts in ' . $category->title . ' category' }}</h1>
     @php $headings = ['#', 'Title', 'Body', 'Tags', 'Updated At'] @endphp
     <x-table-striped :headings="$headings">
@@ -22,4 +22,4 @@
             </tr>
         @endforelse
     </x-table-striped>
-</x-layout>
+</x-layout.main>

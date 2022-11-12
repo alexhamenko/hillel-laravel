@@ -2,6 +2,7 @@
 
 return [
     'this_page' => 'Це :type сторінка!',
+    'back_page' => 'Повернутися до :type сторінки',
     'page_type' => ':Type сторінка',
     'post_type' => ':Type пост',
     'posts_type' => ':Type пости',
@@ -25,6 +26,8 @@ return [
         'home' => 'Головна',
         'post' => 'Пост',
         'posts' => 'Пости',
+        'email' => 'Email',
+        'password' => 'Пароль',
         'category' => 'Категорія',
         'categories' => 'Категорії',
         'tag' => 'Тег',
@@ -35,5 +38,9 @@ return [
         'created_at' => 'Створено о',
         'updated_at' => 'Оновлено о',
         'deleted_at' => 'Видалено о',
-    ]
+        'login' => 'Ввійти',
+        'logout' => 'Вийти',
+        'name' => 'Ім\'я',
+        'admin_panel' => 'Адмін панель',
+    ],
 ];
