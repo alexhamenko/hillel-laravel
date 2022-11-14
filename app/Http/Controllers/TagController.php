@@ -14,7 +14,9 @@ class TagController
      */
     public function index(): View
     {
-        $tags = Tag::paginate(5);
+        $tags = Tag::with(['posts.category', 'posts.tags', 'posts.user', 'posts' => function ($query) {
+            $query->latest()->limit(3);
+        }])->paginate(5);
 
         return view('tag/index', compact('tags'));
     }
@@ -27,7 +29,7 @@ class TagController
      */
     public function show(int $id): View
     {
-        $tag = Tag::find($id);
+        $tag = Tag::with(['posts.category', 'posts.tags', 'posts.user'])->find($id);
         return view('tag/show', compact('tag'));
     }
 }

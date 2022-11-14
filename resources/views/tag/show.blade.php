@@ -6,6 +6,7 @@
     <div class="row row-cols-3 g-4 mb-4">
         @forelse($tag->posts as $post)
             @include('particles.post-card', [
+                'post' => $post,
                 'showTags' => true,
                 'showCategory' => true,
                 'showAuthor' => true,

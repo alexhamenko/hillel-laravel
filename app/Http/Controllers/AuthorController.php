@@ -18,7 +18,9 @@ class AuthorController
      */
     public function index(): View
     {
-        $authors = User::paginate(4);
+        $authors = User::with(['posts.category', 'posts.tags', 'posts' => function ($query) {
+            $query->latest()->limit(3);
+        }])->paginate(5);
         return view('author/index', compact('authors'));
     }
 

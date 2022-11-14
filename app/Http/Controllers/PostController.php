@@ -14,7 +14,7 @@ class PostController
      */
     public function index(): View
     {
-        $posts = Post::paginate(10);
+        $posts = Post::with(['tags', 'category'])->paginate(10);
 
         return view('post.index', compact('posts'));
     }

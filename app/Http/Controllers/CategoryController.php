@@ -14,7 +14,9 @@ class CategoryController
      */
     public function index(): View
     {
-        $categories = Category::paginate(5);
+        $categories = Category::with(['posts.tags', 'posts' => function ($query) {
+            $query->latest()->limit(2);
+        }])->paginate(5);
 
         return view('category/index', compact('categories'));
     }

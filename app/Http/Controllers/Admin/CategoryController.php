@@ -17,7 +17,7 @@ class CategoryController
      */
     public function index(): View
     {
-        $categories = Category::paginate(10);
+        $categories = Category::with(['posts'])->paginate(10);
         $defaultCategoryId = Category::getDefaultCategoryId();
 
         return view('admin/category/index', compact('categories', 'defaultCategoryId'));

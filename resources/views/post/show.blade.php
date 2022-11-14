@@ -10,6 +10,9 @@
                         <div class="text-muted fst-italic mb-2">Posted on {{ $post->created_at->format('F n, Y') }} by
                             <a href="{{ route('author.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                         </div>
+                        <a class="badge bg-primary text-decoration-none link-light" href="{{ route('category.show', ['id' => $post->category->id]) }}">
+                            {{ $post->category->title }}
+                        </a>
                     </header>
                     <figure class="mb-4"><img class="img-fluid rounded"
                                               src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure>
@@ -25,12 +28,6 @@
                                 {{ $tag->title }}
                             </a>
                         @endforeach
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
-                        use, and feature the Bootstrap 5 card component!
                     </div>
                 </div>
             </div>

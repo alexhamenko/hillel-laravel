@@ -17,7 +17,7 @@ class TagController
      */
     public function index(): View
     {
-        $tags = Tag::paginate(10);
+        $tags = Tag::with(['posts'])->paginate(10);
 
         return view('admin/tag/index', compact('tags'));
     }

@@ -5,6 +5,7 @@
         @forelse($posts as $post)
 
             @include('particles.post-card-v2', [
+                'post' => $post,
                 'showCategory' => true,
             ])
 

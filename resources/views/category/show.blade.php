@@ -6,6 +6,7 @@
     <div class="row row-cols-2 g-4 mb-4">
         @forelse($category->posts as $post)
             @include('particles.post-card-v2', [
+                'post' => $post,
                 'showCategory' => false,
             ])
         @empty

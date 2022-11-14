@@ -49,7 +49,7 @@
                     @if($category['id'] !== $defaultCategoryId)
                         <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}"
                            class="btn btn-success">{{ __('custom.action.update') }}</a>
-                        @if($category->posts()->count() > 0)
+                        @if($category->posts->count() > 0)
                             <div
                                 class="d-grid gap-2"
                                 data-bs-toggle="tooltip"

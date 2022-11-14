@@ -9,24 +9,12 @@
         }
     </style>
 @endpush
-
-@php
-    $colors = [
-       'primary',
-       'secondary',
-       'success',
-       'danger',
-       'warning',
-       'info',
-    ]
-@endphp
-
 <div class="col">
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
             @if($showCategory)
                 <a href="{{ route('category.show', ['id' => $post->category->id]) }}" style="z-index: 2;">
-                    <strong class="d-inline-block mb-2 text-{{ Arr::random($colors) }}">{{ $post->category->title }}</strong>
+                    <strong class="d-inline-block mb-2 text-{{ $category_color ?? 'primary' }}">{{ $post->category->title }}</strong>
                 </a>
             @endif
             <h3 class="mb-0">{{ $post->title }}</h3>
