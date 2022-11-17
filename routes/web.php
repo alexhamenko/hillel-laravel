@@ -28,51 +28,70 @@ Route::get('/language/{locale}', LocalizationController::class);
 Route::get('/', HomeController::class)->name('home');
 
 Route::middleware('guest')->group(function() {
-    Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
-    Route::post('/auth/login', [AuthController::class, 'handleLogin'])->name('auth.handle.login');
+    Route::prefix('auth')->group(function () {
+        Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+        Route::post('/login', [AuthController::class, 'handleLogin'])->name('auth.handle.login');
+    });
 });
 
-Route::get('/author/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('author.category.tag.show');
-Route::get('/author/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('author.category.show');
-Route::get('/author/{id}/', [AuthorController::class, 'show'])->name('author.show');
-Route::get('/author', [AuthorController::class, 'index'])->name('author');
+Route::prefix('author')->group(function () {
+    Route::get('/{author}/category/{category}/tag/{tag}', [AuthorController::class, 'showCategoryTag'])->name('author.category.tag.show');
+    Route::get('/{author}/category/{category}', [AuthorController::class, 'showCategory'])->name('author.category.show');
+    Route::get('/{id}/', [AuthorController::class, 'show'])->name('author.show');
+    Route::get('/', [AuthorController::class, 'index'])->name('author');
+});
 
-Route::get('/post', [PostController::class, 'index'])->name('post');
-Route::get('/post/{id}/show', [PostController::class, 'show'])->name('post.show');
+Route::prefix('post')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('post');
+    Route::get('/{id}/show', [PostController::class, 'show'])->name('post.show');
+    Route::post('/comment/{id}', [PostController::class, 'addComment'])->name('post.add.comment');
+});
 
-Route::get('/category', [CategoryController::class, 'index'])->name('category');
-Route::get('/category/{id}/show', [CategoryController::class, 'show'])->name('category.show');
+Route::prefix('category')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('category');
+    Route::get('/{id}/show', [CategoryController::class, 'show'])->name('category.show');
+});
 
-Route::get('/tag', [TagController::class, 'index'])->name('tag');
-Route::get('/tag/{id}/show', [TagController::class, 'show'])->name('tag.show');
+Route::prefix('tag')->group(function () {
+    Route::get('/', [TagController::class, 'index'])->name('tag');
+    Route::get('/{id}/show', [TagController::class, 'show'])->name('tag.show');
+});
 
 Route::middleware('auth')->group(function() {
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::get('/admin', PanelController::class)->name('admin.panel');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', PanelController::class)->name('admin.panel');
 
-    Route::get('/admin/post', [AdminPostController::class, 'index'])->name('admin.post');
-    Route::get('/admin/post/{id}/show', [AdminPostController::class, 'show'])->name('admin.post.show');
-    Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('admin.post.create');
-    Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('admin.post.store');
-    Route::get('/admin/post/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
-    Route::post('/admin/post/update', [AdminPostController::class, 'update'])->name('admin.post.update');
-    Route::get('/admin/post/{id}/delete', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
+        Route::prefix('post')->group(function () {
+            Route::get('/', [AdminPostController::class, 'index'])->name('admin.post');
+            Route::get('/{id}/show', [AdminPostController::class, 'show'])->name('admin.post.show');
+            Route::get('/create', [AdminPostController::class, 'create'])->name('admin.post.create');
+            Route::post('/store', [AdminPostController::class, 'store'])->name('admin.post.store');
+            Route::get('/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.post.edit');
+            Route::post('/update', [AdminPostController::class, 'update'])->name('admin.post.update');
+            Route::get('/{id}/delete', [AdminPostController::class, 'destroy'])->name('admin.post.delete');
+        });
 
-    Route::get('/admin/category', [AdminCategoryController::class, 'index'])->name('admin.category');
-    Route::get('/admin/category/{id}/show', [AdminCategoryController::class, 'show'])->name('admin.category.show');
-    Route::get('/admin/category/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
-    Route::post('/admin/category/store', [AdminCategoryController::class, 'store'])->name('admin.category.store');
-    Route::get('/admin/category/{id}/edit', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
-    Route::post('/admin/category/update', [AdminCategoryController::class, 'update'])->name('admin.category.update');
-    Route::get('/admin/category/{id}/detachpost/{post_id}', [AdminCategoryController::class, 'detachpost'])->name('admin.category.detachpost');
-    Route::get('/admin/category/{id}/delete', [AdminCategoryController::class, 'destroy'])->name('admin.category.delete');
+        Route::prefix('category')->group(function () {
+            Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.category');
+            Route::get('/{id}/show', [AdminCategoryController::class, 'show'])->name('admin.category.show');
+            Route::get('/create', [AdminCategoryController::class, 'create'])->name('admin.category.create');
+            Route::post('/store', [AdminCategoryController::class, 'store'])->name('admin.category.store');
+            Route::get('/{id}/edit', [AdminCategoryController::class, 'edit'])->name('admin.category.edit');
+            Route::post('/update', [AdminCategoryController::class, 'update'])->name('admin.category.update');
+            Route::get('/{id}/detachpost/{post_id}', [AdminCategoryController::class, 'detachpost'])->name('admin.category.detachpost');
+            Route::get('/{id}/delete', [AdminCategoryController::class, 'destroy'])->name('admin.category.delete');
+        });
 
-    Route::get('/admin/tag', [AdminTagController::class, 'index'])->name('admin.tag');
-    Route::get('/admin/tag/{id}/show', [AdminTagController::class, 'show'])->name('admin.tag.show');
-    Route::get('/admin/tag/create', [AdminTagController::class, 'create'])->name('admin.tag.create');
-    Route::post('/admin/tag/store', [AdminTagController::class, 'store'])->name('admin.tag.store');
-    Route::get('/admin/tag/{id}/edit', [AdminTagController::class, 'edit'])->name('admin.tag.edit');
-    Route::post('/admin/tag/update', [AdminTagController::class, 'update'])->name('admin.tag.update');
-    Route::get('/admin/tag/{id}/delete', [AdminTagController::class, 'destroy'])->name('admin.tag.delete');
+        Route::prefix('tag')->group(function () {
+            Route::get('/', [AdminTagController::class, 'index'])->name('admin.tag');
+            Route::get('/{id}/show', [AdminTagController::class, 'show'])->name('admin.tag.show');
+            Route::get('/create', [AdminTagController::class, 'create'])->name('admin.tag.create');
+            Route::post('/store', [AdminTagController::class, 'store'])->name('admin.tag.store');
+            Route::get('/{id}/edit', [AdminTagController::class, 'edit'])->name('admin.tag.edit');
+            Route::post('/update', [AdminTagController::class, 'update'])->name('admin.tag.update');
+            Route::get('/{id}/delete', [AdminTagController::class, 'destroy'])->name('admin.tag.delete');
+        });
+    });
 });
