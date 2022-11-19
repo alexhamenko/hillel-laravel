@@ -8,7 +8,7 @@ use Illuminate\View\View;
 class UserController
 {
     /**
-     * Display admin panel
+     * Display user page
      *
      * @return View
      */

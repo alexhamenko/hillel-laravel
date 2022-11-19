@@ -25,10 +25,12 @@
                     @endif
 
                     <a href="{{ route($route, ['id' => $comment->commentable_id]) }}" class="btn btn-primary">
-                        View on front
+                        {{ __('custom.action.view_front') }}
                     </a>
-                    <a href="{{ route('admin.comment.delete', ['id' => $comment->id]) }}"
-                       class="btn btn-danger">{{ __('custom.action.delete') }}</a>
+                    @can('delete', $comment)
+                        <a href="{{ route('admin.comment.delete', ['id' => $comment->id]) }}"
+                           class="btn btn-danger">{{ __('custom.action.delete') }}</a>
+                    @endcan
                 </td>
             </tr>
         @empty

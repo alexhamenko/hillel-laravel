@@ -10,14 +10,18 @@ return [
     'tag_type' => ':Type tag',
     'not_found' => 'No :type found!',
     'return_to_list' => 'Return to the :type list',
+    'there_are_no_type' => 'There are no :type here yet...',
     'action' => [
         'show' => 'Show',
         'update' => 'Update',
         'delete' => 'Delete',
         'submit' => 'Submit',
+        'view_front' => 'View on front',
         'create_type' => 'Create :type',
         'select_type' => 'Select :type',
         'update_type' => 'Update :type',
+        'edit_type' => 'Edit :type',
+        'add_type' => 'Add :type',
     ],
     'headings' => [
         'title' => 'Title',
@@ -40,7 +44,11 @@ return [
         'deleted_at' => 'Deleted At',
         'login' => 'Login',
         'logout' => 'Logout',
+        'sign_in' => 'Sign in',
+        'sign_out' => 'Sing out',
         'name' => 'Name',
+        'profile' => 'Profile',
         'admin_panel' => 'Admin panel',
+        'paid_functionality' => 'Paid Functionality',
     ]
 ];

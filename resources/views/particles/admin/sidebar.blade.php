@@ -15,22 +15,22 @@
         <x-nav-link-sidebar href="{{ route('admin.post') }}"
                     :active="request()->routeIs('admin.post', 'admin.post.*')"
                     icon="journal-text">
-            Edit posts
+            {{ __('custom.action.edit_type', ['type' => 'posts']) }}
         </x-nav-link-sidebar>
         <x-nav-link-sidebar href="{{ route('admin.category') }}"
                     :active="request()->routeIs('admin.category', 'admin.category.*')"
                     icon="inboxes-fill">
-            Edit categories
+            {{ __('custom.action.edit_type', ['type' => 'categories']) }}
         </x-nav-link-sidebar>
         <x-nav-link-sidebar href="{{ route('admin.tag') }}"
                     :active="request()->routeIs('admin.tag', 'admin.tag.*')"
                     icon="tags">
-            Edit tags
+            {{ __('custom.action.edit_type', ['type' => 'tags']) }}
         </x-nav-link-sidebar>
         <x-nav-link-sidebar href="{{ route('admin.comment') }}"
                     :active="request()->routeIs('admin.comment', 'admin.comment.*')"
                     icon="chat-left-text">
-            Edit comments
+            {{ __('custom.action.edit_type', ['type' => 'comments']) }}
         </x-nav-link-sidebar>
     </ul>
     <hr>

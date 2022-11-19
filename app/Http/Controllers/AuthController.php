@@ -39,8 +39,12 @@ class AuthController extends Controller
                 $user->password = Hash::make($credentials['password']);
                 $user->save();
             }
-
-            return redirect()->route('admin.panel');
+            if ($user->can('access-admin-panel')) {
+                return redirect()->route('admin.panel');
+            } else if ($user->can('access-paid-functionality')) {
+                return redirect()->route('paid.functionality');
+            }
+            return redirect()->route('home');
         }
 
         return back()->withErrors([

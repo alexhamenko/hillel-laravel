@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $users = User::factory(10)->create();
+        $first_user = $users->first();
+        $first_user->name = 'Admin';
+        $first_user->email = 'admin@mydomain.com';
+        $first_user->password = Hash::make('admin');
+        $first_user->role_name = 'super_admin';
+        $first_user->save();
+
         $categories = Category::factory(25)->create();
 
         $posts = Post::factory(100)->make()->each(function ($post) use ($users, $categories) {

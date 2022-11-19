@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Paid\FunctionalityController as PaidFunctionalityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
@@ -64,7 +65,7 @@ Route::prefix('tag')->group(function () {
 Route::middleware('auth')->group(function() {
     Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->middleware('can:access-admin-panel')->group(function () {
         Route::get('/', PanelController::class)->name('admin.panel');
 
         Route::get('/user/{id}/show', [UserController::class, 'show'])->name('admin.user.show');
@@ -103,5 +104,10 @@ Route::middleware('auth')->group(function() {
             Route::post('/update', [AdminTagController::class, 'update'])->name('admin.tag.update');
             Route::get('/{id}/delete', [AdminTagController::class, 'destroy'])->name('admin.tag.delete');
         });
+    });
+
+
+    Route::prefix('paid')->middleware('can:access-paid-functionality')->group(function () {
+        Route::get('/', PaidFunctionalityController::class)->name('paid.functionality');
     });
 });

@@ -22,7 +22,7 @@
                 <td class="d-grid gap-2">
                     <a href="{{ route('tag.show', ['id' => $tag->id]) }}"
                        class="btn btn-primary">
-                        View on front
+                        {{ __('custom.action.view_front') }}
                     </a>
                     <a href="{{ route('admin.tag.show', ['id' => $tag->id]) }}"
                        class="btn btn-info">

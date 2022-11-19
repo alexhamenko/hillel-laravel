@@ -31,6 +31,14 @@
                             icon="person-circle">
                     {{ __('custom.headings.authors') }}
                 </x-nav-link>
+
+                @can('access-paid-functionality')
+                <x-nav-link href="{{ route('paid.functionality') }}"
+                            :active="request()->routeIs('paid.functionality')"
+                            icon="currency-exchange">
+                    {{ __('custom.headings.paid_functionality') }}
+                </x-nav-link>
+                @endcan
             </ul>
 
             <div class="d-flex">
@@ -39,7 +47,7 @@
                     @include('particles.profile-dropdown')
                 @else
                     <a href="{{ route('auth.login') }}">
-                        <button type="button" class="btn btn-outline-light me-2">{{ __('custom.headings.login') }}</button>
+                        <button type="button" class="btn btn-outline-light me-2">{{ __('custom.headings.sign_in') }}</button>
                     </a>
                 @endauth
 

@@ -8,11 +8,13 @@
         </div>
     </div>
     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        @if(! request()->routeIs('admin.*'))
-            <li><a class="dropdown-item" href="{{ route('admin.panel') }}">Admin panel</a></li>
-        @endif
-        <li><a class="dropdown-item" href="{{ route('admin.user.show', ['id' => Auth::user()->id]) }}">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Sign out</a></li>
+        @can('access-admin-panel')
+            @if(! request()->routeIs('admin.*'))
+                <li><a class="dropdown-item" href="{{ route('admin.panel') }}">{{ __('custom.headings.admin_panel') }}</a></li>
+            @endif
+            <li><a class="dropdown-item" href="{{ route('admin.user.show', ['id' => Auth::user()->id]) }}">{{ __('custom.headings.profile') }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+        @endcan
+        <li><a class="dropdown-item" href="{{ route('auth.logout') }}">{{ __('custom.headings.sign_out') }}</a></li>
     </ul>
 </div>

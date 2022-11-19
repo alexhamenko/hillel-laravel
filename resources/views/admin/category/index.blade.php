@@ -45,7 +45,7 @@
                 </th>
                 <td class="d-grid gap-2">
                     <a href="{{ route('category.show', ['id' => $category->id]) }}"
-                       class="btn btn-primary">View on front</a>
+                       class="btn btn-primary">{{ __('custom.action.view_front') }}</a>
                     <a href="{{ route('admin.category.show', ['id' => $category->id]) }}"
                        class="btn btn-info">{{ __('custom.action.show') }}</a>
                     @if($category['id'] !== $defaultCategoryId)

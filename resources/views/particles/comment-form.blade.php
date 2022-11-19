@@ -11,7 +11,7 @@
                           placeholder="Join the discussion and leave a comment!"
                           name="body"
                           id="body"></textarea>
-                <button class="btn btn-primary text-nowrap" type="submit">Add comment</button>
+                <button class="btn btn-primary text-nowrap" type="submit">{{ __('custom.action.add_type', ['type' => 'comment']) }}</button>
             </form>
             @forelse($comments as $comment)
                 <div class="d-flex mb-4">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             @empty
-                <p>There are no comments here yet...</p>
+                <p>{{ __('custom.there_are_no_type', ['type' => 'comments']) }}</p>
             @endforelse
         </div>
     </div>
