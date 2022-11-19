@@ -1,20 +1,21 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     @stack('styles')
 </head>
 <body>
-<main>
-    <div class="row">
-        <div class="col">
-            {{ $slot }}
-        </div>
-    </div>
+@php
+    $sidebarWidth = 340;
+@endphp
+@include('particles.admin.sidebar', compact('sidebarWidth'))
+<main class="p-3" style="margin-left: {{$sidebarWidth}}px;">
+    {{ $slot }}
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"

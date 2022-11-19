@@ -31,4 +31,12 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

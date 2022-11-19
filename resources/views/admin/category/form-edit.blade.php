@@ -1,6 +1,6 @@
 @section('title', __('custom.action.update_type', ['type' => 'category']))
 
-<x-layout.main>
+<x-layout.admin>
     <h1>{{ __('custom.action.update_type', ['type' => 'category']) }}</h1>
     <form action="{{ route('admin.category.update') }}" method="post" class="mb-3">
         @csrf
@@ -47,4 +47,4 @@
     </form>
 
     <a href="{{ route('admin.category') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'categories']) }}</a>
-</x-layout.main>
+</x-layout.admin>

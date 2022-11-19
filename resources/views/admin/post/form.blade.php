@@ -1,6 +1,6 @@
 @section('title', __('custom.action.create_type', ['type' => 'post']))
 
-<x-layout.main>
+<x-layout.admin>
     <h1>{{ __('custom.action.create_type', ['type' => 'post']) }}</h1>
     <form action="{{ route('admin.post.store') }}" method="post" class="mb-3">
         @csrf
@@ -69,4 +69,4 @@
     </form>
 
     <a href="{{ route('admin.post') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'posts']) }}<</a>
-</x-layout.main>
+</x-layout.admin>

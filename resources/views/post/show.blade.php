@@ -17,6 +17,12 @@
                     <figure class="mb-4"><img class="img-fluid rounded"
                                               src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure>
                     <section class="mb-5">{{ $post->body }}</section>
+
+                    @include('particles.comment-form', [
+                        'actionRoute' => 'post.add.comment',
+                        'actionId' => $post->id,
+                        'comments' => $post->comments,
+                    ])
                 </article>
             </div>
             <div class="col-lg-4">
@@ -33,7 +39,6 @@
             </div>
         </div>
     </div>
-
 
     <a href="{{ route('post') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'posts']) }}</a>
 </x-layout.main>

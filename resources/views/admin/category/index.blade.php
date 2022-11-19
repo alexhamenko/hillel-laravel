@@ -17,7 +17,7 @@
     </script>
 @endpush
 
-<x-layout.main>
+<x-layout.admin>
     @php $headings = [
         '#',
         __('custom.headings.title'),
@@ -44,8 +44,10 @@
                     @endforeach
                 </th>
                 <td class="d-grid gap-2">
+                    <a href="{{ route('category.show', ['id' => $category->id]) }}"
+                       class="btn btn-primary">View on front</a>
                     <a href="{{ route('admin.category.show', ['id' => $category->id]) }}"
-                       class="btn btn-primary">{{ __('custom.action.show') }}</a>
+                       class="btn btn-info">{{ __('custom.action.show') }}</a>
                     @if($category['id'] !== $defaultCategoryId)
                         <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}"
                            class="btn btn-success">{{ __('custom.action.update') }}</a>
@@ -78,4 +80,4 @@
 
     <a href="{{ route('admin.category.create') }}"
        class="btn btn-primary">{{ __('custom.action.create_type', ['type' => 'category']) }}</a>
-</x-layout.main>
+</x-layout.admin>

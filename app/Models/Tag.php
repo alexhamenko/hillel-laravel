@@ -19,4 +19,12 @@ class Tag extends Model
     {
         return $this->belongsToMany(Post::class)->withTimestamps();
     }
+
+    /**
+     * Get all of the tag's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

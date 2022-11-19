@@ -1,6 +1,6 @@
 @section('title', __('custom.page_type', ['type' => $post->title]))
 
-<x-layout.main>
+<x-layout.admin>
     <h1>{{ $post->title }}</h1>
     <ul class="list-group mb-3">
         <li class="list-group-item">{{ __('custom.headings.body') }}: {{ $post->body }}</li>
@@ -19,5 +19,5 @@
         <li class="list-group-item">{{ __('custom.headings.updated_at') }}: {{ $post->updated_at }}</li>
     </ul>
     <a href="{{ route('admin.post') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'posts']) }}</a>
-</x-layout.main>
+</x-layout.admin>
 

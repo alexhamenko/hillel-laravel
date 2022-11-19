@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -30,6 +31,11 @@ class DatabaseSeeder extends Seeder
         $tags = Tag::factory(100)->create();
         $posts->each(function ($post) use ($tags) {
             $post->tags()->attach($tags->random(rand(5, 10))->pluck('id'));
+        });
+
+        Comment::factory(50)->make()->each(function ($comment) use ($users) {
+            $comment->user_id = $users->random()->id;
+            $comment->save();
         });
     }
 }

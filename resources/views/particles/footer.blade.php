@@ -11,18 +11,11 @@
             </a>
 
             <ul class="nav col-md-4 justify-content-end">
-                @auth
-                    <li class="nav-item"><a href="{{ route('admin.panel') }}" class="nav-link px-2 text-white">{{ __('custom.headings.admin_panel') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('admin.post') }}" class="nav-link px-2 text-white">{{ __('custom.headings.posts') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('admin.category') }}" class="nav-link px-2 text-white">{{ __('custom.headings.categories') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('admin.tag') }}" class="nav-link px-2 text-white">{{ __('custom.headings.tags') }}</a></li>
-                @else
-                    <li class="nav-item"><a href="{{ route('home') }}" class="nav-link px-2 text-white">{{ __('custom.headings.home') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('post') }}" class="nav-link px-2 text-white">{{ __('custom.headings.posts') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('category') }}" class="nav-link px-2 text-white">{{ __('custom.headings.categories') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('tag') }}" class="nav-link px-2 text-white">{{ __('custom.headings.tags') }}</a></li>
-                    <li class="nav-item"><a href="{{ route('author') }}" class="nav-link px-2 text-white">{{ __('custom.headings.authors') }}</a></li>
-                @endauth
+                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link px-2 text-white">{{ __('custom.headings.home') }}</a></li>
+                <li class="nav-item"><a href="{{ route('post') }}" class="nav-link px-2 text-white">{{ __('custom.headings.posts') }}</a></li>
+                <li class="nav-item"><a href="{{ route('category') }}" class="nav-link px-2 text-white">{{ __('custom.headings.categories') }}</a></li>
+                <li class="nav-item"><a href="{{ route('tag') }}" class="nav-link px-2 text-white">{{ __('custom.headings.tags') }}</a></li>
+                <li class="nav-item"><a href="{{ route('author') }}" class="nav-link px-2 text-white">{{ __('custom.headings.authors') }}</a></li>
             </ul>
         </div>
     </div>

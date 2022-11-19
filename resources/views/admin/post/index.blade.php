@@ -1,6 +1,6 @@
 @section('title', __('custom.page_type', ['type' => 'posts']))
 
-<x-layout.main>
+<x-layout.admin>
     @php $headings = [
         '#',
         __('custom.headings.title'),
@@ -28,7 +28,8 @@
                     <a href="{{ route('author.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                 </td>
                 <td class="d-grid gap-2">
-                    <a href="{{ route('admin.post.show', ['id' => $post->id]) }}" class="btn btn-primary">{{ __('custom.action.show') }}</a>
+                    <a href="{{ route('post.show', ['id' => $post->id]) }}" class="btn btn-primary">View on front</a>
+                    <a href="{{ route('admin.post.show', ['id' => $post->id]) }}" class="btn btn-info">{{ __('custom.action.show') }}</a>
                     <a href="{{ route('admin.post.edit', ['id' => $post->id]) }}" class="btn btn-success">{{ __('custom.action.update') }}</a>
                     <a href="{{ route('admin.post.delete', ['id' => $post->id]) }}" class="btn btn-danger">{{ __('custom.action.delete') }}</a>
                 </td>
@@ -42,4 +43,4 @@
     {{ $posts->onEachSide(1)->links() }}
 
     <a href="{{ route('admin.post.create') }}" class="btn btn-primary">{{ __('custom.action.create_type', ['type' => 'post']) }}</a>
-</x-layout.main>
+</x-layout.admin>

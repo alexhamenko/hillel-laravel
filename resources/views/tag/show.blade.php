@@ -15,5 +15,12 @@
             <p>{{ __('custom.not_found', ['type' => 'posts']) }}</p>
         @endforelse
     </div>
+
+    @include('particles.comment-form', [
+        'actionRoute' => 'tag.add.comment',
+        'actionId' => $tag->id,
+        'comments' => $tag->comments,
+    ])
+
     <a href="{{ route('tag') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'tags']) }}</a>
 </x-layout.main>

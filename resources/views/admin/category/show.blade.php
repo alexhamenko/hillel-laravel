@@ -1,6 +1,6 @@
 @section('title', __('custom.category_type', ['type' => $category->title]))
 
-<x-layout.main>
+<x-layout.admin>
     <h1 class="text-center my-3">{{ __('custom.posts_type', ['type' => $category->title]) }}</h1>
     @php $headings = [
         '#',
@@ -23,4 +23,4 @@
         @endforelse
     </x-table-striped>
     <a href="{{ route('admin.category') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'categories']) }}</a>
-</x-layout.main>
+</x-layout.admin>

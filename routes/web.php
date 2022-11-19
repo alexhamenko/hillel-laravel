@@ -8,6 +8,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
@@ -50,11 +52,13 @@ Route::prefix('post')->group(function () {
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('category');
     Route::get('/{id}/show', [CategoryController::class, 'show'])->name('category.show');
+    Route::post('/comment/{id}', [CategoryController::class, 'addComment'])->name('category.add.comment');
 });
 
 Route::prefix('tag')->group(function () {
     Route::get('/', [TagController::class, 'index'])->name('tag');
     Route::get('/{id}/show', [TagController::class, 'show'])->name('tag.show');
+    Route::post('/comment/{id}', [TagController::class, 'addComment'])->name('tag.add.comment');
 });
 
 Route::middleware('auth')->group(function() {
@@ -63,6 +67,12 @@ Route::middleware('auth')->group(function() {
     Route::prefix('admin')->group(function () {
         Route::get('/', PanelController::class)->name('admin.panel');
 
+        Route::get('/user/{id}/show', [UserController::class, 'show'])->name('admin.user.show');
+
+        Route::prefix('comment')->group(function () {
+            Route::get('/', [CommentController::class, 'index'])->name('admin.comment');
+            Route::get('/{id}/delete', [CommentController::class, 'destroy'])->name('admin.comment.delete');
+        });
         Route::prefix('post')->group(function () {
             Route::get('/', [AdminPostController::class, 'index'])->name('admin.post');
             Route::get('/{id}/show', [AdminPostController::class, 'show'])->name('admin.post.show');
