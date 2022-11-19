@@ -1,6 +1,6 @@
 @section('title', __('custom.action.create_type', ['type' => 'tag']))
 
-<x-layout.main>
+<x-layout.admin>
     <h1>{{ __('custom.action.create_type', ['type' => 'tag']) }}</h1>
     <form action="{{ route('admin.tag.store') }}" method="post" class="mb-3">
         @csrf
@@ -46,4 +46,4 @@
     </form>
 
     <a href="{{ route('admin.tag') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'tags']) }}</a>
-</x-layout.main>
+</x-layout.admin>

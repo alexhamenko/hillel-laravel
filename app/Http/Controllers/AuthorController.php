@@ -7,22 +7,43 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\View\View;
 
 class AuthorController
 {
-    public function index()
+    /**
+     * Display listing of authors.
+     *
+     * @return View
+     */
+    public function index(): View
     {
-        $authors = User::paginate(4);
+        $authors = User::with(['posts.category', 'posts.tags', 'posts' => function ($query) {
+            $query->latest()->limit(3);
+        }])->paginate(5);
         return view('author/index', compact('authors'));
     }
 
-    public function show($id)
+    /**
+     * Display author with specified id.
+     *
+     * @param int $id
+     * @return View
+     */
+    public function show(int $id): View
     {
         $author = User::find($id);
         return view('author/show', compact('author'));
     }
 
-    public function showCategory($author_id, $category_id)
+    /**
+     * Display posts belongs to author and category with specified id's.
+     *
+     * @param int $author_id
+     * @param int $category_id
+     * @return View
+     */
+    public function showCategory(int $author_id, int $category_id): View
     {
         $author = User::find($author_id);
         $category = Category::find($category_id);
@@ -36,7 +57,15 @@ class AuthorController
         return view('author/show-category', compact('author', 'category', 'posts'));
     }
 
-    public function showCategoryTag($author_id, $category_id, $tag_id)
+    /**
+     * Display posts belongs to author, category and tag with specified id's.
+     *
+     * @param int $author_id
+     * @param int $category_id
+     * @param int $tag_id
+     * @return View
+     */
+    public function showCategoryTag(int $author_id, int $category_id, int $tag_id): View
     {
         $author = User::find($author_id);
         $category = Category::find($category_id);
@@ -50,7 +79,7 @@ class AuthorController
             $query->where('tag_id', $tag_id);
         })->get();
 
-        return view('author/show-category-tag', compact('author', 'category','tag', 'posts'));
+        return view('author/show-category-tag', compact('author', 'category', 'tag', 'posts'));
     }
 }
 

@@ -8,9 +8,10 @@
                class="btn btn-primary ">View all</a>
         </div>
         <div class="row row-cols-2 g-4 mb-4">
-            @forelse($category->posts->take(2) as $post)
+            @forelse($category->posts as $post)
                 @include('particles.post-card-v2', [
-                    'showCategory' => true,
+                    'post' => $post,
+                    'showCategory' => false,
                 ])
             @empty
                 <p>{{ __('custom.not_found', ['type' => 'posts']) }}</p>

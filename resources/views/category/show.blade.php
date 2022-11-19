@@ -6,11 +6,19 @@
     <div class="row row-cols-2 g-4 mb-4">
         @forelse($category->posts as $post)
             @include('particles.post-card-v2', [
+                'post' => $post,
                 'showCategory' => false,
             ])
         @empty
             <p>{{ __('custom.not_found', ['type' => 'posts']) }}</p>
         @endforelse
     </div>
+
+    @include('particles.comment-form', [
+        'actionRoute' => 'category.add.comment',
+        'actionId' => $category->id,
+        'comments' => $category->comments,
+    ])
+
     <a href="{{ route('category') }}" class="btn btn-secondary">{{ __('custom.return_to_list', ['type' => 'categories']) }}</a>
 </x-layout.main>

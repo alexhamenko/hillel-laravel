@@ -9,7 +9,7 @@
     @stack('styles')
 </head>
 <body>
-<main class="container my-3">
+<main>
     <div class="row">
         <div class="col">
             {{ $slot }}

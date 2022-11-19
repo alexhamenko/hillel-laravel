@@ -8,7 +8,7 @@ $link_classes = $active
 $nav_icon = $icon ?? 'bi-link';
 @endphp
 
-<li>
+<li class="nav-item">
     @if($active)
         <div class="{{ $link_classes }}">
             <i class="bi bi-{{ $nav_icon }} d-flex justify-content-center" style="font-size: 1.5rem;"></i>

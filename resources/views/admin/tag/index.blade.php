@@ -1,6 +1,6 @@
 @section('title', __('custom.page_type', ['type' => 'tag']))
 
-<x-layout.main>
+<x-layout.admin>
     @php $headings = [
         '#',
         __('custom.headings.title'),
@@ -20,8 +20,12 @@
                     @endforeach
                 </th>
                 <td class="d-grid gap-2">
-                    <a href="{{ route('admin.tag.show', ['id' => $tag->id]) }}"
+                    <a href="{{ route('tag.show', ['id' => $tag->id]) }}"
                        class="btn btn-primary">
+                        {{ __('custom.action.view_front') }}
+                    </a>
+                    <a href="{{ route('admin.tag.show', ['id' => $tag->id]) }}"
+                       class="btn btn-info">
                         {{ __('custom.action.show') }}
                     </a>
                     <a href="{{ route('admin.tag.edit', ['id' => $tag->id]) }}"
@@ -45,4 +49,4 @@
 
     <a href="{{ route('admin.tag.create') }}"
        class="btn btn-primary">{{ __('custom.action.create_type', ['type' => 'tag']) }}</a>
-</x-layout.main>
+</x-layout.admin>

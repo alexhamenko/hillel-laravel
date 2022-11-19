@@ -1,6 +1,6 @@
 @section('title', __('custom.page_type', ['type' => 'posts']))
 
-<x-layout.main>
+<x-layout.admin>
     @php $headings = [
         '#',
         __('custom.headings.title'),
@@ -28,18 +28,32 @@
                     <a href="{{ route('author.show', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
                 </td>
                 <td class="d-grid gap-2">
-                    <a href="{{ route('admin.post.show', ['id' => $post->id]) }}" class="btn btn-primary">{{ __('custom.action.show') }}</a>
-                    <a href="{{ route('admin.post.edit', ['id' => $post->id]) }}" class="btn btn-success">{{ __('custom.action.update') }}</a>
-                    <a href="{{ route('admin.post.delete', ['id' => $post->id]) }}" class="btn btn-danger">{{ __('custom.action.delete') }}</a>
+                    <a href="{{ route('post.show', ['id' => $post->id]) }}" class="btn btn-primary">{{ __('custom.action.view_front') }}</a>
+                    @can('view', $post)
+                    <a href="{{ route('admin.post.show', ['id' => $post->id]) }}"
+                       class="btn btn-info">{{ __('custom.action.show') }}</a>
+                    @endcan
+                    @can('update', $post)
+                        <a href="{{ route('admin.post.edit', ['id' => $post->id]) }}"
+                           class="btn btn-success">{{ __('custom.action.update') }}</a>
+                    @endcan
+                    @can('delete', $post)
+                        <a href="{{ route('admin.post.delete', ['id' => $post->id]) }}"
+                           class="btn btn-danger">{{ __('custom.action.delete') }}</a>
+                    @endcan
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="{{ count($headings) }}" style="text-align: center">{{ __('custom.not_found', ['type' => 'posts']) }}</td>
+                <td colspan="{{ count($headings) }}"
+                    style="text-align: center">{{ __('custom.not_found', ['type' => 'posts']) }}</td>
             </tr>
         @endforelse
     </x-table-striped>
     {{ $posts->onEachSide(1)->links() }}
 
-    <a href="{{ route('admin.post.create') }}" class="btn btn-primary">{{ __('custom.action.create_type', ['type' => 'post']) }}</a>
-</x-layout.main>
+    @can('create', \App\Models\Post::class)
+        <a href="{{ route('admin.post.create') }}"
+           class="btn btn-primary">{{ __('custom.action.create_type', ['type' => 'post']) }}</a>
+    @endcan
+</x-layout.admin>

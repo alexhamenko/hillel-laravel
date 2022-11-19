@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEagerLimit;
 
     protected $fillable = [
         'title',
@@ -20,12 +21,6 @@ class Category extends Model
      * @var int
      */
     protected static $default_category_id = 1;
-
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
 
     /**
      * Returns id of default category which used for uncategorized posts
@@ -43,5 +38,19 @@ class Category extends Model
      */
     public static function setDefaultCategoryId(int $id) {
         self::$default_category_id = $id;
+    }
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get all of the category's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
