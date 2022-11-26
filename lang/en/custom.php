@@ -11,6 +11,7 @@ return [
     'not_found' => 'No :type found!',
     'return_to_list' => 'Return to the :type list',
     'there_are_no_type' => 'There are no :type here yet...',
+    'sign_in_with_type' => 'Sign in with :Type',
     'action' => [
         'show' => 'Show',
         'update' => 'Update',
