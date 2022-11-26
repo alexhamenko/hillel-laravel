@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Oauth;
 
 use App\Models\User;
+use App\Enums\UserRoleNameEnum;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -61,7 +62,7 @@ class TwitchController
             $user = User::create([
                 'name' => $userInfo['display_name'],
                 'email' => $userInfo['email'],
-                'role_name' => 'viewer',
+                'role_name' => UserRoleNameEnum::Author->value,
                 'password' => Hash::make($userInfo['id'] . '_' . $userInfo['login']),
             ]);
         }
