@@ -28,11 +28,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('access-admin-panel', function (User $user) {
-            return in_array($user->role_name, ['super_admin', 'admin', 'author', 'viewer']);
+            return in_array($user->role_name->value, ['super_admin', 'admin', 'author', 'viewer']);
         });
 
         Gate::define('access-paid-functionality', function (User $user) {
-            return in_array($user->role_name, ['super_admin', 'paid_user']);
+            return in_array($user->role_name->value, ['super_admin', 'paid_user']);
         });
     }
 }
