@@ -18,7 +18,7 @@ class PostPolicy
      */
     public function viewAny(User $user)
     {
-        return in_array($user->role_name, ['super_admin', 'admin', 'author', 'viewer']);
+        return in_array($user->role_name->value, ['super_admin', 'admin', 'author', 'viewer']);
     }
 
     /**
@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return in_array($user->role_name, ['super_admin', 'admin', 'author', 'viewer']);
+        return in_array($user->role_name->value, ['super_admin', 'admin', 'author', 'viewer']);
     }
 
     /**
@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->role_name, ['super_admin', 'admin', 'author']);
+        return in_array($user->role_name->value, ['super_admin', 'admin', 'author']);
     }
 
     /**
@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id || in_array($user->role_name, ['super_admin', 'admin', 'author']);
+        return $user->id === $post->user_id || in_array($user->role_name->value, ['super_admin', 'admin', 'author']);
     }
 
     /**
@@ -65,7 +65,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id || in_array($user->role_name, ['super_admin', 'admin']);
+        return $user->id === $post->user_id || in_array($user->role_name->value, ['super_admin', 'admin']);
     }
 
     /**
@@ -77,7 +77,7 @@ class PostPolicy
      */
     public function restore(User $user, Post $post)
     {
-        return $user->id === $post->user_id || in_array($user->role_name, ['super_admin', 'admin']);
+        return $user->id === $post->user_id || in_array($user->role_name->value, ['super_admin', 'admin']);
     }
 
     /**
@@ -89,6 +89,6 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post)
     {
-        return in_array($user->role_name, ['super_admin', 'admin']);
+        return in_array($user->role_name->value, ['super_admin', 'admin']);
     }
 }

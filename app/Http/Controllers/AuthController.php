@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use App\Enums\UserRoleNameEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,24 @@ class AuthController extends Controller
      */
     public function login(): View
     {
-        return view('auth/form');
+        $urlGithub = 'https://github.com/login/oauth/authorize';
+        $parameters = [
+            'client_id' => getenv('OAUTH_GITHUB_CLIENT_ID'),
+            'redirect_uri' => getenv('OAUTH_GITHUB_REDIRECT_URI'),
+            'scope' => 'user',
+        ];
+        $urlGithub .= '?' . http_build_query($parameters);
+
+        $urlTwitch = 'https://id.twitch.tv/oauth2/authorize';
+        $parameters = [
+            'client_id' => getenv('OAUTH_TWITCH_CLIENT_ID'),
+            'redirect_uri' => getenv('OAUTH_TWITCH_REDIRECT_URI'),
+            'response_type' => 'code',
+            'scope' => 'user:read:email',
+        ];
+        $urlTwitch .= '?' . http_build_query($parameters);
+
+        return view('auth/form', compact('urlGithub', 'urlTwitch'));
     }
 
     /**

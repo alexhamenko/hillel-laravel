@@ -11,6 +11,7 @@ return [
     'not_found' => ':Type не знайдено!',
     'return_to_list' => 'Повернутися до списку :type',
     'there_are_no_type' => 'Тут поки немає:type',
+    'sign_in_with_type' => 'Зареєструватись за допомогою :Type',
     'action' => [
         'show' => 'Показати',
         'update' => 'Оновити',

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Oauth\GitHubController;
+use App\Http\Controllers\Oauth\TwitchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -29,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/language/{locale}', LocalizationController::class);
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/oauth/github/callback', GitHubController::class)->name('oauth.github.callback');
+Route::get('/oauth/twitch/callback', TwitchController::class)->name('oauth.twitch.callback');
 
 Route::middleware('guest')->group(function() {
     Route::prefix('auth')->group(function () {
