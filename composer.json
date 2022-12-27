@@ -6,11 +6,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "donatj/phpuseragentparser": "^1.7",
+        "geoip2/geoip2": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "staudenmeir/eloquent-eager-limit": "^1.0"
+        "staudenmeir/eloquent-eager-limit": "^1.0",
+        "whichbrowser/parser": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
