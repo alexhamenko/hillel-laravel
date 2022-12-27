@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\GeoIpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/language/{locale}', LocalizationController::class);
 Route::get('/', HomeController::class)->name('home');
+Route::get('/geo', GeoIpController::class);
 
 Route::get('/oauth/github/callback', GitHubController::class)->name('oauth.github.callback');
 Route::get('/oauth/twitch/callback', TwitchController::class)->name('oauth.twitch.callback');
