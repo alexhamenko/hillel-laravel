@@ -2,11 +2,12 @@
 
 namespace App\Services\UserAgent;
 
+use donatj\UserAgent\UserAgent;
 use donatj\UserAgent\UserAgentParser;
 
 class DonatjService implements UserAgentParserInterface
 {
-    /** @var UserAgentParser */
+    /** @var UserAgent */
     protected $_data;
 
     public function __construct()
