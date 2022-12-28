@@ -5,9 +5,9 @@ namespace App\Providers;
 use App\Services\Geo\GeoServiceInterface;
 use App\Services\Geo\IpApiGeoService;
 use App\Services\Geo\MaxmindService;
-use App\Services\UserAgent\DonatjService;
-use App\Services\UserAgent\UserAgentParserInterface;
-use App\Services\UserAgent\WhichBrowserService;
+use Hillel\UserAgent\DonatjParser\DonatjService;
+use Hillel\UserAgent\ParserInterface\UserAgentParserInterface;
+use Hillel\UserAgent\WhichBrowserParser\WhichBrowserService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(UserAgentParserInterface::class, function () {
-            return new DonatjService();
-//            return new WhichBrowserService();
+//            return new DonatjService();
+            return new WhichBrowserService();
         });
     }
 

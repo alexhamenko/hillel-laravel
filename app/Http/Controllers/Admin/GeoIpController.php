@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Visit;
 use App\Services\Geo\GeoServiceInterface;
-use App\Services\UserAgent\UserAgentParserInterface;
+use Hillel\UserAgent\ParserInterface\UserAgentParserInterface;
 
 class GeoIpController extends Controller
 {
