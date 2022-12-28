@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(UserAgentParserInterface::class, function () {
-//            return new DonatjService();
-            return new WhichBrowserService();
+            return new DonatjService();
+//            return new WhichBrowserService();
         });
     }
 
