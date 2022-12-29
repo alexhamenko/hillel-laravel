@@ -17,6 +17,7 @@ class GeoIpController extends Controller
         };
 
         $reader->parse($ip);
+        $parser->parse(request()->userAgent());
 
         $isoCode          = $reader->getIsoCode();
         $country          = $reader->getCountry();
