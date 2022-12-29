@@ -2421,16 +2421,16 @@
         },
         {
             "name": "olorin/user-agent-parser-donatj",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexhamenko/user-agent-parser-donatj.git",
-                "reference": "1958a7fa7ec523fd2b508d40e3fc5630e9a5afa7"
+                "reference": "73538c4c694e03c68a551df19a2482e38dd4cb3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-donatj/zipball/1958a7fa7ec523fd2b508d40e3fc5630e9a5afa7",
-                "reference": "1958a7fa7ec523fd2b508d40e3fc5630e9a5afa7",
+                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-donatj/zipball/73538c4c694e03c68a551df19a2482e38dd4cb3f",
+                "reference": "73538c4c694e03c68a551df19a2482e38dd4cb3f",
                 "shasum": ""
             },
             "require": {
@@ -2456,22 +2456,22 @@
             "description": "Implementation of UserAgentParserInterface using donatj/PhpUserAgent library",
             "support": {
                 "issues": "https://github.com/alexhamenko/user-agent-parser-donatj/issues",
-                "source": "https://github.com/alexhamenko/user-agent-parser-donatj/tree/v1.0.2"
+                "source": "https://github.com/alexhamenko/user-agent-parser-donatj/tree/v1.1.0"
             },
-            "time": "2022-12-28T15:20:21+00:00"
+            "time": "2022-12-29T17:31:22+00:00"
         },
         {
             "name": "olorin/user-agent-parser-interface",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexhamenko/user-agent-parser-interface.git",
-                "reference": "6c64b2d05d8fdb1e82812e5c8ac54ee4efc32017"
+                "reference": "ba9a54272ec930879ec2ab8f9dde80367cd383cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-interface/zipball/6c64b2d05d8fdb1e82812e5c8ac54ee4efc32017",
-                "reference": "6c64b2d05d8fdb1e82812e5c8ac54ee4efc32017",
+                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-interface/zipball/ba9a54272ec930879ec2ab8f9dde80367cd383cf",
+                "reference": "ba9a54272ec930879ec2ab8f9dde80367cd383cf",
                 "shasum": ""
             },
             "type": "library",
@@ -2493,22 +2493,22 @@
             "description": "Interface for services parsing User Agents",
             "support": {
                 "issues": "https://github.com/alexhamenko/user-agent-parser-interface/issues",
-                "source": "https://github.com/alexhamenko/user-agent-parser-interface/tree/v1.0.0"
+                "source": "https://github.com/alexhamenko/user-agent-parser-interface/tree/v1.1.0"
             },
-            "time": "2022-12-28T11:57:17+00:00"
+            "time": "2022-12-29T17:25:26+00:00"
         },
         {
             "name": "olorin/user-agent-parser-whichbrowser",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexhamenko/user-agent-parser-whichbrowser.git",
-                "reference": "bac18486618549f4ab6e0a0e89b9f461446dfe92"
+                "reference": "46575f9bf1bb49ea47a396c44d333e79c10c7be5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-whichbrowser/zipball/bac18486618549f4ab6e0a0e89b9f461446dfe92",
-                "reference": "bac18486618549f4ab6e0a0e89b9f461446dfe92",
+                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-whichbrowser/zipball/46575f9bf1bb49ea47a396c44d333e79c10c7be5",
+                "reference": "46575f9bf1bb49ea47a396c44d333e79c10c7be5",
                 "shasum": ""
             },
             "require": {
@@ -2533,10 +2533,10 @@
             ],
             "description": "Implementation of UserAgentParserInterface using WhichBrowser/Parser-PHP library",
             "support": {
-                "source": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/tree/v1.0.0",
+                "source": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/tree/v1.1.0",
                 "issues": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/issues"
             },
-            "time": "2022-12-28T15:26:29+00:00"
+            "time": "2022-12-29T17:42:40+00:00"
         },
         {
             "name": "phpoption/phpoption",
