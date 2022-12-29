@@ -2499,20 +2499,19 @@
         },
         {
             "name": "olorin/user-agent-parser-whichbrowser",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexhamenko/user-agent-parser-whichbrowser.git",
-                "reference": "46575f9bf1bb49ea47a396c44d333e79c10c7be5"
+                "reference": "cd76e252d8342990d5e01a7164dc78fc9338c7b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-whichbrowser/zipball/46575f9bf1bb49ea47a396c44d333e79c10c7be5",
-                "reference": "46575f9bf1bb49ea47a396c44d333e79c10c7be5",
+                "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-whichbrowser/zipball/cd76e252d8342990d5e01a7164dc78fc9338c7b8",
+                "reference": "cd76e252d8342990d5e01a7164dc78fc9338c7b8",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^9.19",
                 "olorin/user-agent-parser-interface": "^1.0",
                 "whichbrowser/parser": "^2.1"
             },
@@ -2533,10 +2532,10 @@
             ],
             "description": "Implementation of UserAgentParserInterface using WhichBrowser/Parser-PHP library",
             "support": {
-                "source": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/tree/v1.1.0",
+                "source": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/tree/v1.1.1",
                 "issues": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/issues"
             },
-            "time": "2022-12-29T17:42:40+00:00"
+            "time": "2022-12-29T18:10:34+00:00"
         },
         {
             "name": "phpoption/phpoption",
