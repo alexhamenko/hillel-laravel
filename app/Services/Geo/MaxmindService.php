@@ -24,7 +24,6 @@ class MaxmindService implements GeoServiceInterface
     /**
      * @param string $ip
      * @return void
-     * @throws \MaxMind\Db\Reader\InvalidDatabaseException
      */
     public function parse(string $ip): void
     {

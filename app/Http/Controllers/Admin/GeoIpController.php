@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ParseVisitorInfo;
 use App\Models\Visit;
 use App\Services\Geo\GeoServiceInterface;
 use Hillel\UserAgent\ParserInterface\UserAgentParserInterface;
@@ -16,22 +17,8 @@ class GeoIpController extends Controller
             $ip = request()->server->get('HTTP_X_FORWARDED_FOR');
         };
 
-        $reader->parse($ip);
-        $parser->parse(request()->userAgent());
+        $user_agent = request()->userAgent();
 
-        $isoCode          = $reader->getIsoCode();
-        $country          = $reader->getCountry();
-        $browser          = $parser->getBrowser();
-        $operating_system = $parser->getOS();
-
-        if (!empty($isoCode) || !empty($country)) {
-            Visit::create([
-                'ip' => $ip,
-                'country_code' => $country,
-                'continent_code' => $isoCode,
-                'browser' => $browser,
-                'operating_system' => $operating_system,
-            ]);
-        }
+        ParseVisitorInfo::dispatch($ip, $user_agent)->onQueue('parsing');
     }
 }

@@ -17,19 +17,17 @@ class ParseVisitorInfo implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $ip;
-    public $reader;
-    public $parser;
+    public $user_agent;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $ip, GeoServiceInterface $reader, UserAgentParserInterface $parser)
+    public function __construct(string $ip, string $user_agent)
     {
         $this->ip = $ip;
-        $this->reader = $reader;
-        $this->parser = $parser;
+        $this->user_agent = $user_agent;
     }
 
     /**
@@ -37,12 +35,15 @@ class ParseVisitorInfo implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(GeoServiceInterface $reader, UserAgentParserInterface $parser)
     {
-        $isoCode          = $this->reader->getIsoCode();
-        $country          = $this->reader->getCountry();
-        $browser          = $this->parser->getBrowser();
-        $operating_system = $this->parser->getOS();
+        $reader->parse($this->ip);
+        $parser->parse($this->user_agent);
+
+        $isoCode          = $reader->getIsoCode();
+        $country          = $reader->getCountry();
+        $browser          = $parser->getBrowser();
+        $operating_system = $parser->getOS();
 
         Visit::create([
             'ip' => $this->ip,
