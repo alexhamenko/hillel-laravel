@@ -16,7 +16,9 @@ class GeoIpController extends Controller
         if ($ip === '127.0.0.1') {
             $ip = request()->server->get('HTTP_X_FORWARDED_FOR');
         };
-        $reader->parse($ip);
-        ParseVisitorInfo::dispatch($ip, $reader, $parser)->onQueue('parsing');
+
+        $user_agent = request()->userAgent();
+
+        ParseVisitorInfo::dispatch($ip, $user_agent)->onQueue('parsing');
     }
 }
