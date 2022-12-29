@@ -2508,7 +2508,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/alexhamenko/user-agent-parser-whichbrowser/zipball/cd76e252d8342990d5e01a7164dc78fc9338c7b8",
-                "reference": "cd76e252d8342990d5e01a7164dc78fc9338c7b8",
+                "reference": "cd76e252d8342990d5e01a7164dc78fc9338c7b8"
                 "shasum": ""
             },
             "require": {
@@ -2535,7 +2535,7 @@
                 "source": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/tree/v1.1.1",
                 "issues": "https://github.com/alexhamenko/user-agent-parser-whichbrowser/issues"
             },
-            "time": "2022-12-29T18:10:34+00:00"
+            "time": "2022-12-29T18:10:34+00:00
         },
         {
             "name": "phpoption/phpoption",
